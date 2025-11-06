@@ -1,0 +1,589 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Formulário — Consultoria Financeira</title>
+  <!-- Fontes -->
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&family=Sansation:wght@700&family=Faustina:wght@600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --verde: #2e7d32;
+      --dourado: #d4af37;
+      --preto: #111;
+      --prata: #c0c0c0;
+      --bg: #b3b3b3;
+      --card: #222222;
+      --muted: #6b7280;
+      --accent: var(--dourado);
+    }
+
+    body {
+      font-family: 'Roboto', sans-serif; /* texto geral */
+      background: var(--bg);
+      color: var(--preto);
+      margin: 0;
+      padding: 24px;
+    }
+
+    h1, legend {
+      font-family: 'Faustina', serif; /* títulos */
+      color: var(--verde);
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    h1 {
+      font-family: 'Sansation';
+      font-size: 2rem;
+      margin-bottom: 6px;
+      text-align: center;
+    }
+
+    p.lead {
+      color: var(--muted);
+      margin-top: 0;
+      text-align: center;
+    }
+
+    form.card {
+      background: var(--card);
+      padding: 18px;
+      border-radius: 12px;
+      box-shadow: 0 6px 20px rgba(16, 24, 40, 0.06);
+    }
+
+    fieldset {
+      border: 0;
+      margin: 0;
+      padding: 0 0 16px;
+    }
+
+    legend {
+      font-size: 1.2rem;
+      font-weight: 600;
+      margin: 12px 0;
+      border-bottom: 2px solid var(--dourado);
+      padding-bottom: 4px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+    }
+
+    label {
+      display: block;
+      font-size: 0.9rem;
+      margin-bottom: 6px;
+      color: var(--verde);
+      font-weight: 500;
+    }
+
+    input[type=text], input[type=email], input[type=number], select, textarea {
+      width: 410px;
+      padding: 10px;
+      border-radius: 8px;
+      border: 1px solid #e6e9ef;
+      font-size: 0.95rem;
+      background: #fff;
+      color: var(--preto);
+    }
+
+    textarea {
+      min-height: 90px;
+      resize: vertical;
+    }
+
+    .full { grid-column: 1 / -1; }
+
+    .btn-row {
+      display: flex;
+      gap: 8px;
+      justify-content: flex-end;
+      margin-top: 12px;
+    }
+
+    button {
+      background: var(--dourado);
+      color: var(--preto);
+      padding: 10px 14px;
+      border-radius: 10px;
+      border: 0;
+      font-weight: 600;
+      cursor: pointer;
+      transition: 0.2s ease;
+      font-family: 'Sansation', sans-serif;
+    }
+
+    button:hover { background: var(--verde); color: #fff; }
+
+    button.ghost {
+      background: transparent;
+      color: var(--verde);
+      border: 2px solid var(--verde);
+    }
+
+    .muted-small {
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
+
+    .overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.45);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 100;
+      display: none;
+    }
+
+    .modal {
+      background: #fff;
+      padding: 20px;
+      border-radius: 12px;
+      max-width: 520px;
+      width: 90%;
+      box-shadow: 0 12px 40px rgba(2, 6, 23, 0.2);
+      border-top: 5px solid var(--dourado);
+    }
+
+    .modal h2 {
+      margin: 0 0 8px;
+      font-family: 'Faustina', serif;
+      color: var(--verde);
+    }
+
+    .summary {
+      background: #f8fafc;
+      border-radius: 8px;
+      padding: 10px;
+      margin-top: 10px;
+      font-size: 0.9rem;
+      color: var(--preto);
+      overflow: auto;
+      max-height: 220px;
+      border: 1px solid var(--prata);
+    }
+
+    .small-note {
+      font-size: 0.85rem;
+      color: var(--muted);
+      margin-top: 8px;
+      text-align: center;
+    }
+
+    @media (max-width: 700px) {
+      .grid { grid-template-columns: 1fr; }
+      .btn-row { flex-direction: column-reverse; align-items: stretch; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Consultoria Financeira</h1>
+    <p class="lead">Preencha as informações e clique em <strong>Enviar</strong>.</p>
+
+    <form id="financeForm" class="card" autocomplete="off">
+     
+    <form id="financeForm" class="card" autocomplete="off">
+
+      <fieldset>
+        <legend>1. Dados pessoais</legend>
+        <div class="grid">
+          <div>
+            <label>Nome completo</label>
+            <input name="nome" type="text" required>
+          </div>
+          <div>
+            <label>Idade</label>
+            <input name="idade" type="number" min="0">
+          </div>
+          <div>
+            <label>Estado civil</label>
+            <input name="estado_civil" type="text">
+          </div>
+          <div>
+            <label>Endereço completo</label>
+            <input name="endereco" type="text">
+          </div>
+          <div>
+            <label>RG</label>
+            <input name="rg" type="text">
+          </div>
+          <div>
+            <label>CPF</label>
+            <input name="cpf" type="text">
+          </div>
+          <div>
+            <label>Possui filhos? Se sim, quantos?</label>
+            <input name="filhos" type="text">
+          </div>
+          <div>
+            <label>Número de contato</label>
+            <input name="telefone" type="text">
+          </div>
+          <div class="full">
+            <label>E-mail de contato</label>
+            <input name="email" type="email">
+          </div>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>2. Situação financeira atual e motivação</legend>
+        <div class="grid">
+          <div class="full">
+            <label>Como você descreveria sua situação financeira hoje?</label>
+            <textarea name="situacao_atual"></textarea>
+          </div>
+          <div class="full">
+            <label>O que te motivou a procurar ajuda financeira agora?</label>
+            <textarea name="motivacao"></textarea>
+          </div>
+          <div>
+            <label>Você se considera em controle das suas finanças?</label>
+            <select name="controle">
+              <option value="">--</option>
+              <option>Sim</option>
+              <option>Mais ou menos</option>
+              <option>Não</option>
+            </select>
+          </div>
+          <div>
+            <label>Você sente ansiedade ou preocupação quando pensa em dinheiro?</label>
+            <select name="ansiedade">
+              <option value="">--</option>
+              <option>Quase nunca</option>
+              <option>Às vezes</option>
+              <option>Frequentemente</option>
+            </select>
+          </div>
+          <div class="full">
+            <label>Qual é sua principal dificuldade financeira no momento?</label>
+            <textarea name="dificuldade_principal"></textarea>
+          </div>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>3. Renda e fontes de ganhos</legend>
+        <div class="grid">
+          <div class="full">
+            <label>Quais são suas fontes de renda atuais?</label>
+            <textarea name="fontes_renda"></textarea>
+          </div>
+          <div>
+            <label>Sua renda é fixa ou variável?</label>
+            <select name="renda_tipo">
+              <option value="">--</option>
+              <option>Fixa</option>
+              <option>Variável</option>
+              <option>Mista</option>
+            </select>
+          </div>
+          <div>
+            <label>Você recebe mensalmente, semanalmente ou de forma irregular?</label>
+            <select name="frequencia_recebimento">
+              <option value="">--</option>
+              <option>Mensalmente</option>
+              <option>Semanalmente</option>
+              <option>Irregular</option>
+            </select>
+          </div>
+          <div>
+            <label>Existe alguém que contribui com as despesas da casa?</label>
+            <select name="contribui_casa">
+              <option value="">--</option>
+              <option>Sim</option>
+              <option>Não</option>
+            </select>
+          </div>
+          <div class="full">
+            <label>Você tem alguma renda extra (freelancer, vendas, etc.)?</label>
+            <textarea name="renda_extra"></textarea>
+          </div>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>4. Despesas e hábitos de consumo</legend>
+        <div class="grid">
+          <div>
+            <label>Você sabe quanto gasta, em média, por mês?</label>
+            <input name="gasto_medio" type="text">
+          </div>
+          <div>
+            <label>Você anota ou controla suas despesas de alguma forma?</label>
+            <select name="controla_despesas">
+              <option value="">--</option>
+              <option>Sim (planilha/app)</option>
+              <option>Às vezes</option>
+              <option>Não</option>
+            </select>
+          </div>
+          <div class="full">
+            <label>Quais são seus maiores gastos fixos (aluguel, contas, transporte)?</label>
+            <textarea name="gastos_fixos"></textarea>
+          </div>
+          <div class="full">
+            <label>Quais são seus principais gastos variáveis (alimentação, lazer, roupas, etc.)?</label>
+            <textarea name="gastos_variaveis"></textarea>
+          </div>
+          <div>
+            <label>Há gastos que poderiam ser reduzidos sem te afetar muito?</label>
+            <select name="reduzir_gastos">
+              <option value="">--</option>
+              <option>Sim</option>
+              <option>Talvez</option>
+              <option>Não</option>
+            </select>
+          </div>
+          <div>
+            <label>Você costuma comprar por impulso?</label>
+            <select name="compra_impulso">
+              <option value="">--</option>
+              <option>Raramente</option>
+              <option>Às vezes</option>
+              <option>Frequentemente</option>
+            </select>
+          </div>
+          <div class="full">
+            <label>Quais situações te levam a gastar mais do que gostaria?</label>
+            <textarea name="gatilhos_gasto"></textarea>
+          </div>
+          <div>
+            <label>Você costuma parcelar compras no cartão de crédito?</label>
+            <select name="parcelamento">
+              <option value="">--</option>
+              <option>Sim</option>
+              <option>Não</option>
+            </select>
+          </div>
+          <div>
+            <label>Costuma pagar o valor total ou o mínimo da fatura?</label>
+            <select name="paga_fatura">
+              <option value="">--</option>
+              <option>Valor total</option>
+              <option>Valor mínimo</option>
+              <option>Às vezes</option>
+            </select>
+          </div>
+          <div>
+            <label>Já atrasou alguma conta nos últimos meses?</label>
+            <select name="atraso_contas">
+              <option value="">--</option>
+              <option>Sim</option>
+              <option>Não</option>
+            </select>
+          </div>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>5. Dívidas e inadimplência</legend>
+        <div class="grid">
+          <div>
+            <label>Você tem dívidas atualmente?</label>
+            <select name="tem_dividas">
+              <option value="">--</option>
+              <option>Sim</option>
+              <option>Não</option>
+            </select>
+          </div>
+          <div>
+            <label>Com quem são essas dívidas?</label>
+            <input name="dividas_com" type="text">
+          </div>
+          <div>
+            <label>Qual é o valor total aproximado das dívidas?</label>
+            <input name="valor_dividas" type="text">
+          </div>
+          <div>
+            <label>Há quanto tempo você está endividado(a)?</label>
+            <input name="tempo_endividado" type="text">
+          </div>
+          <div class="full">
+            <label>Você sabe quais dívidas têm os juros mais altos?</label>
+            <textarea name="juros_altos"></textarea>
+          </div>
+          <div class="full">
+            <label>Já tentou renegociar ou quitar alguma delas? Como foi?</label>
+            <textarea name="renegociacao"></textarea>
+          </div>
+          <div>
+            <label>Há cobranças ou restrições no seu nome (SPC, Serasa, etc.)?</label>
+            <select name="restricoes">
+              <option value="">--</option>
+              <option>Sim</option>
+              <option>Não</option>
+            </select>
+          </div>
+          <div>
+            <label>Qual dessas dívidas te causa mais preocupação hoje?</label>
+            <input name="divida_preocupante" type="text">
+          </div>
+          <div class="full">
+            <label>Você tem algum plano atual para sair das dívidas?</label>
+            <textarea name="plano_dividas"></textarea>
+          </div>
+          <div>
+            <label>Você sabe quanto poderia pagar por mês para começar a quitar tudo?</label>
+            <input name="pagar_por_mes" type="text">
+          </div>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>6. Organização e controle financeiro</legend>
+        <div class="grid">
+          <div>
+            <label>Você costuma planejar seus gastos antes de receber o salário?</label>
+            <select name="planeja_gastos">
+              <option value="">--</option>
+              <option>Sim</option>
+              <option>Às vezes</option>
+              <option>Não</option>
+            </select>
+          </div>
+          <div>
+            <label>Você separa o dinheiro em categorias (contas, alimentação, lazer, etc.)?</label>
+            <select name="separa_dinheiro">
+              <option value="">--</option>
+              <option>Sim</option>
+              <option>Não</option>
+            </select>
+          </div>
+          <div>
+            <label>Você usa planilha, aplicativo ou caderno para controlar o dinheiro?</label>
+            <input name="ferramenta_controle" type="text">
+          </div>
+          <div>
+            <label>Você sabe quanto sobra (ou falta) no final de cada mês?</label>
+            <input name="sobra_mes" type="text">
+          </div>
+          <div class="full">
+            <label>Há meses em que o dinheiro acaba antes do fim do mês?</label>
+            <select name="acaba_mes">
+              <option value="">--</option>
+              <option>Sim</option>
+              <option>Não</option>
+            </select>
+          </div>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>7. Mentalidade e comportamento financeiro</legend>
+        <div class="grid">
+          <div class="full">
+            <label>Quando você pensa em dinheiro, qual é o primeiro sentimento que vem?</label>
+            <textarea name="sentimento_dinheiro"></textarea>
+          </div>
+          <div>
+            <label>Você aprendeu a lidar com dinheiro em casa ou sozinho(a)?</label>
+            <input name="aprendeu_em" type="text">
+          </div>
+          <div>
+            <label>Você costuma conversar sobre finanças com alguém da família?</label>
+            <select name="conversa_financas">
+              <option value="">--</option>
+              <option>Sim</option>
+              <option>Não</option>
+            </select>
+          </div>
+          <div class="full">
+            <label>O que dinheiro significa pra você (segurança, liberdade, preocupação...)?</label>
+            <textarea name="significado_dinheiro"></textarea>
+          </div>
+          <div>
+            <label>Você se considera disciplinado(a) para seguir um plano financeiro?</label>
+            <select name="disciplinado">
+              <option value="">--</option>
+              <option>Sim</option>
+              <option>Mais ou menos</option>
+              <option>Não</option>
+            </select>
+          </div>
+          <div>
+            <label>Em uma escala de 1 a 10, quanto você quer mudar sua situação atual?</label>
+            <input name="escala_mudanca" type="number" min="1" max="10">
+          </div>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>8. Metas, expectativas e próximos passos</legend>
+        <div class="grid">
+          <div class="full">
+            <label>O que você espera alcançar com esta consultoria?</label>
+            <textarea name="expectativa_consultoria"></textarea>
+          </div>
+          <div>
+            <label>Em quanto tempo você gostaria de resolver ou melhorar sua situação financeira?</label>
+            <input name="prazo_melhora" type="text">
+          </div>
+          <div>
+            <label>Que tipo de apoio você espera do consultor (orientação, plano, acompanhamento)?</label>
+            <input name="apoio_esperado" type="text">
+          </div>
+          <div class="full">
+            <label>Você está disposto(a) a mudar alguns hábitos para atingir seus objetivos?</label>
+            <select name="disposto_mudar">
+              <option value="">--</option>
+              <option>Sim</option>
+              <option>Talvez</option>
+              <option>Não</option>
+            </select>
+          </div>
+        </div>
+      </fieldset>
+
+      <div class="btn-row">
+        <button type="button" class="ghost" id="limparBtn">Limpar</button>
+        <button type="submit">Enviar (simulado)</button>
+      </div>
+
+    </form>
+    </form>
+
+  </div>
+
+  <div class="overlay" id="overlay">
+    <div class="modal" role="dialog" aria-modal="true">
+      <h2>Envio Simulado Concluído</h2>
+      <p class="muted-small">Obrigado! Os dados foram simulados localmente. Veja o resumo abaixo:</p>
+      <div class="summary" id="summary"></div>
+      <div style="display:flex;gap:8px;justify-content:flex-end;margin-top:12px">
+        <button id="closeModal">Fechar</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const form = document.getElementById('financeForm');
+    const overlay = document.getElementById('overlay');
+    const summary = document.getElementById('summary');
+    const closeModal = document.getElementById('closeModal');
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const data = Object.fromEntries(new FormData(form).entries());
+      summary.innerHTML = Object.entries(data)
+        .map(([k, v]) => `<strong>${k}</strong>: ${v || '<span style=\"color:#6b7280\">(vazio)</span>'}`)
+        .join('<br>');
+      overlay.style.display = 'flex';
+      form.reset();
+    });
+
+    closeModal.addEventListener('click', () => overlay.style.display = 'none');
+    overlay.addEventListener('click', (e) => { if (e.target === overlay) overlay.style.display = 'none'; });
+  </script>
+</body>
+</html>
